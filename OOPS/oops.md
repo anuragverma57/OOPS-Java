@@ -1,6 +1,6 @@
 # 🧠 OOPS in Java — Ultra Detailed Notes (From Your PDF)
 
-> Source preserved from your handwritten notes: fileciteturn2file0
+> Source preserved from your handwritten notes
 > NOTHING removed. Everything expanded deeply with same flow + better clarity.
 
 ---
