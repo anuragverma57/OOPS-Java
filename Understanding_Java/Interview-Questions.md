@@ -387,4 +387,353 @@ If you explain internal working → ✅ Strong hire signal
 
 ---
 
+
+# Java Interviewer Favorite Questions (Deep Explanation Version)
+
+---
+
+## 21. How does HashMap handle collisions internally?
+
+### Answer:
+
+When two keys generate the same hash index, HashMap stores them in the same bucket.
+
+### Deep Explanation:
+
+* Initially, each bucket is a LinkedList
+* When multiple elements collide, they are chained together
+* After Java 8, if the number of elements in a bucket exceeds 8, it converts into a Balanced Tree (Red-Black Tree)
+
+### Why this matters:
+
+* LinkedList → O(n)
+* Tree → O(log n)
+
+So worst-case performance improves significantly.
+
+---
+
+## 22. What is load factor and rehashing in HashMap?
+
+### Answer:
+
+Load factor defines when HashMap should resize.
+
+### Deep Explanation:
+
+* Default load factor = 0.75
+* When size > capacity * loadFactor → resizing happens
+
+Example:
+If capacity = 16
+Threshold = 16 × 0.75 = 12
+
+After 12 elements → resize to 32
+
+### Rehashing:
+
+* New array is created
+* All elements are reinserted
+* Index recalculated
+
+### Why important:
+
+Too small → waste memory
+Too large → slow performance
+
+---
+
+## 23. Why capacity is always power of 2 in HashMap?
+
+### Answer:
+
+To optimize index calculation.
+
+### Deep Explanation:
+
+HashMap uses:
+index = hash & (capacity - 1)
+
+Example:
+capacity = 16 (10000)
+
+This is much faster than modulo (%) operation.
+
+### Why power of 2:
+
+Ensures uniform distribution of keys.
+
+---
+
+## 24. What happens when two keys have same hashCode?
+
+### Answer:
+
+They go into the same bucket.
+
+### Deep Explanation:
+
+* First, hashCode() determines bucket
+* Then equals() is used to compare keys
+
+### Important:
+
+If equals() is not overridden properly → duplicates or wrong behavior
+
+---
+
+## 25. Can HashMap have null key?
+
+### Answer:
+
+Yes, only one null key is allowed.
+
+### Deep Explanation:
+
+* null key always goes to bucket index 0
+* Multiple null keys overwrite previous value
+
+---
+
+## 26. What is JVM architecture?
+
+### Answer:
+
+JVM consists of:
+
+* ClassLoader
+* Runtime Memory Areas
+* Execution Engine
+
+### Deep Explanation:
+
+1. ClassLoader → loads .class files
+2. Memory Areas → stores data
+3. Execution Engine → executes bytecode
+
+---
+
+## 27. What are different memory areas in JVM?
+
+### Answer:
+
+* Heap
+* Stack
+* Method Area
+* PC Register
+* Native Stack
+
+### Deep Explanation:
+
+* Heap → Objects (shared)
+* Stack → Method calls (per thread)
+* Method Area → class metadata
+* PC Register → current instruction
+
+---
+
+## 28. What is Garbage Collection?
+
+### Answer:
+
+Automatic memory cleanup process.
+
+### Deep Explanation:
+
+GC removes objects that are no longer reachable.
+
+Example:
+Object has no reference → eligible for GC
+
+---
+
+## 29. What are types of Garbage Collectors?
+
+### Answer:
+
+* Serial GC
+* Parallel GC
+* CMS
+* G1 GC
+
+### Deep Explanation:
+
+* Serial → single thread
+* Parallel → multiple threads
+* CMS → low pause time
+* G1 → best for large apps
+
+---
+
+## 30. What is mark-and-sweep algorithm?
+
+### Answer:
+
+Basic GC algorithm.
+
+### Deep Explanation:
+
+1. Mark phase → mark reachable objects
+2. Sweep phase → delete unreachable
+
+Problem:
+Leaves memory fragmentation
+
+---
+
+## 31. What is memory leak in Java?
+
+### Answer:
+
+When unused objects are still referenced.
+
+### Deep Explanation:
+
+GC cannot remove them because references still exist.
+
+Example:
+Static list storing unused objects
+
+---
+
+## 32. What are reference types?
+
+### Answer:
+
+* Strong
+* Weak
+* Soft
+* Phantom
+
+### Deep Explanation:
+
+* Strong → never GC
+* Weak → removed quickly
+* Soft → removed when memory low
+
+---
+
+## 33. What is Stop-The-World?
+
+### Answer:
+
+GC pauses all threads.
+
+### Deep Explanation:
+
+During GC, application stops completely.
+
+Impact:
+High latency systems suffer
+
+---
+
+## 34. What is JIT compiler?
+
+### Answer:
+
+Converts bytecode to machine code at runtime.
+
+### Deep Explanation:
+
+* Improves performance
+* Frequently used code is optimized
+
+---
+
+## 35. What is classloader?
+
+### Answer:
+
+Loads classes into JVM.
+
+### Deep Explanation:
+
+Follows delegation:
+
+* Bootstrap
+* Extension
+* Application
+
+---
+
+## 36. Heap vs Stack?
+
+### Answer:
+
+* Heap → objects
+* Stack → execution
+
+### Deep Explanation:
+
+Stack is faster, heap is shared.
+
+---
+
+## 37. What is escape analysis?
+
+### Answer:
+
+Optimization technique.
+
+### Deep Explanation:
+
+If object does not escape method → allocate on stack
+
+---
+
+## 38. What is GC root?
+
+### Answer:
+
+Starting point of GC.
+
+### Deep Explanation:
+
+Includes:
+
+* Static variables
+* Thread references
+
+---
+
+## 39. What is generational GC?
+
+### Answer:
+
+Heap divided into generations.
+
+### Deep Explanation:
+
+* Young → short-lived objects
+* Old → long-lived
+
+Optimization:
+Most objects die young
+
+---
+
+## 40. Minor vs Major GC?
+
+### Answer:
+
+* Minor → young gen
+* Major → old gen
+
+### Deep Explanation:
+
+Minor is fast, Major is slow and expensive
+
+---
+
+## 🚀 Final Insight
+
+If you truly understand THIS document:
+
+* You can answer 90% Java interviews
+* Focus on explaining WHY and INTERNALS
+
+---
+
+
 **End of Document**
